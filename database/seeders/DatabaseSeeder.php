@@ -13,11 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Create 10 tags
+        $tags = \App\Models\Tag::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Create 20 jobs
+        \App\Models\Job::factory(20)->create()->each(function($job) use ($tags) {
+            // Attach 2 random tags to each job
+            $job->tags()->attach($tags->random(2));
+        });
     }
 }

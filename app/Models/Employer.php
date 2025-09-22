@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Employer extends Model
 {
     use HasFactory;
+
+    // Part 1: Define the relationship to Job
+    public function jobs()
+    {
+        return $this->hasMany(\App\Models\Job::class);
+    }
 }
